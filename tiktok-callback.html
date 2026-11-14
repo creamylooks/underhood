@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Underhood Publisher · TikTok sign-in</title><link rel="stylesheet" href="style.css"></head>
+<body><main>
+<h1>Under<b>hood</b> Publisher</h1>
+<p id="msg" class="muted">Finishing TikTok sign-in…</p>
+<p><button id="copy" style="display:none;font:600 16px Inter,sans-serif;padding:12px 22px;border-radius:999px;border:0;background:#FF6A1A;color:#fff;cursor:pointer">Copy sign-in code</button></p>
+<p class="muted" style="font-size:14px">This page only displays the one-time code TikTok returns, so it can be pasted into Underhood's own publishing tool. Nothing is stored or sent anywhere.</p>
+<nav><a href="index.html">Home</a><a href="privacy.html">Privacy policy</a></nav>
+<script>
+const q = new URLSearchParams(location.search), code = q.get("code"), err = q.get("error_description") || q.get("error");
+const msg = document.getElementById("msg"), btn = document.getElementById("copy");
+if (code) { msg.textContent = "TikTok sign-in approved. Copy the code below and run the store command on the Mac."; btn.style.display = "inline-block";
+  btn.onclick = async () => { await navigator.clipboard.writeText(code); btn.textContent = "Copied"; }; }
+else if (err) { msg.textContent = "TikTok sign-in failed: " + err; }
+else { msg.textContent = "No sign-in code found. Start the sign-in again from the Mac."; }
+</script>
+</main></body></html>
